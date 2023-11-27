@@ -1,0 +1,51 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html lang="en" class="flex flex-col min-h-screen">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- DaisyUI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <!-- Your Tailwind CSS reference if you're not using the CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body data-theme="mainTheme" class="flex flex-col flex-grow font-sans antialiased text-gray-200 bg-base-100 ">
+  <!-- Navbar -->
+  <div class=" mt-12" ></div>
+  <header class="fixed top-0 z-40 w-full">
+    <div class="flex justify-center mt-4">
+      <nav class="navbar w-8/12 bg-neutral text-neutral-content border-2 border-secondary rounded-full ">
+        <div class="flex-1">
+          <a href="#" class="btn btn-ghost normal-case text-xl font-thin text-normal not-italic">Sam Golpasand</a>
+        </div> 
+        <div class="flex-none space-x-2">
+          <!-- Primary Nav -->
+          <a href="#about" class="btn btn-ghost">About</a>
+          <a href="#work" class="btn btn-ghost">Work</a>
+          <a href="#services" class="btn btn-ghost">Services</a>
+          <a href="#blog" class="btn btn-ghost">Blog</a>
+          <a href="#contact" class="btn rounded-full">Hit me up</a>
+        </div>
+      </nav>
+  </header>
+  </div>
+  
+  
+  <!-- Main content -->
+  <div class="flex-grow"> 
+    {% block body %}
+    {% endblock %}
+  </div>
+  <!-- Main content end -->
+
+  <script src="{{ url_for('static', filename='src/js.js') }}"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+</html>
