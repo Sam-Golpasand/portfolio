@@ -24,7 +24,6 @@
 }
 
 
-
 html, body {
     font-family: "Montserrat";
     font-weight: 600;
@@ -54,8 +53,8 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 200px;
-  padding: 100px 20vw;
+  min-height: 250px;
+  padding: 50px 20vw;
 }
 
 .spacer {
@@ -72,6 +71,18 @@ section {
 .layer2 {
   background-image: url("../img/layer2.svg");
 }
+.layer3 {
+  background-image: url("../img/layer3.svg");
+}
+.layer4 {
+  background-image: url("../img/layer4.svg");
+}
+.layer5 {
+  background-image: url("../img/layer5.svg");
+}
+.layer6 {
+  background-image: url("../img/layer6.svg");
+}
 
 .solutionsharp {
   height: 24rem;
@@ -82,18 +93,10 @@ section {
   background-color: #232d3f;
 }
 
-.loader {
-  border-top-color: #3498db; /* Use your primary color here */
-  -webkit-animation: spinner 1.5s linear infinite;
-  animation: spinner 1.5s linear infinite;
+.bottom-center {
+  position: fixed; /* Fixed position */
+  left: 50%;      /* Center the element horizontally */
+  bottom: 0;      /* Align the element to the bottom */
+  transform: translateX(-50%); /* Offset the element to the left by half its width */
 }
 
-@-webkit-keyframes spinner {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spinner {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}

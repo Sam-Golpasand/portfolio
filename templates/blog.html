@@ -45,6 +45,14 @@
 	</ol>
 </div>
 
+{% if session["user_id"] %}
+<div class="fixed inset-x-0 bottom-0 mx-auto w-max mb-48">
+  <a href="/createBlog"><button class="btn btn-ghost mr-6" > create blog </button></a>
+	<a href="/manage"><button class="btn btn-ghost" > manage blogs </button></a>
+</div>
 
+  {% else %}
+
+	{% endif %}
 
 {% endblock %}

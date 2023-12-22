@@ -11,7 +11,7 @@ bcrypt = Bcrypt(app)
 
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SECRET_KEY'] = os.urandom(24)
-app.config['UPLOAD_FOLDER'] = "static/upload"
+app.config['UPLOAD_FOLDER'] = "static/uploads"
 
 Session(app)
 
@@ -90,6 +90,25 @@ def createBlog():
         return redirect("/blog")
     else:
         return render_template("createBlog.html")
+
+@app.route("/manage")
+@login_required
+def manageBlog():
+        conn, c = dbCon()
+        c.execute("SELECT * FROM blogPost")
+        posts = c.fetchall()
+        dbClose(conn, c)
+        return render_template("manageBlog.html", posts=posts)
+
+@app.route("/delete-post/<int:post_id>", methods=["POST"])
+@login_required
+def delete_post(post_id):
+    conn, c = dbCon()
+    c.execute("DELETE FROM blogPost WHERE id = ?", (post_id,))
+    conn.commit()
+    dbClose(conn, c)
+    flash("Blog post deleted successfully.", "success")
+    return redirect("/manage")
 
 @app.route("/blog/<int:post_id>")
 def blog_post(post_id):

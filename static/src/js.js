@@ -43,3 +43,36 @@ function fetchData() {
           hideLoader();
       });
 }
+
+document.addEventListener('alpine:init', () => {
+  Alpine.data('skillDisplay', () => ({
+      skills: [{
+              'title': 'HTML',
+              'percent': '95',
+          },
+          {
+              'title': 'CSS',
+              'percent': '70',
+          },
+          {
+              'title': 'Tailwind CSS',
+              'percent': '70',
+          },
+          {
+              'title': 'Python',
+              'percent': '65',
+          },
+          {
+              'title': 'SQL',
+              'percent': '60',
+          }, {
+              'title': 'Javascript',
+              'percent': '65',
+          }
+      ],
+      currentSkill: {
+          'title': 'HTML',
+          'percent': '95',
+      }
+  }));
+});
