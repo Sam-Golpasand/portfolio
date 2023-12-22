@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %} Sam Golpasand {% endblock %}
+
+{% block body %}
+
+<!-- This is an example component -->
+<div class="max-w-2xl mx-auto mt-32">
+
+<!-- Flash Message Container -->
+<div class="fixed top-10 right-0 m-4 z-10" id="flash-message">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-info flex items-center p-4 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6 mr-2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>{{ msg }}</span>
+        </div>
+        {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+	<ol class="relative border-l border-gray-200 dark:border-gray-700">
+		{% for blog in blogs %}
+    <li class="mb-10 ml-4">
+			<div
+				class="absolute w-3 h-3 bg-gray-200 rounded-full -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700">
+			</div>
+			<time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{{ blog.date_posted }}</time>
+			<h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ blog.title }}</h3>
+			<p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+				{{ blog.description }}
+			</p>
+			<a href="/blog/{{blog.id}}"
+				class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Learn
+				more <svg class="w-3 h-3 ml-2" fill="currentColor" viewBox="0 0 20 20"
+					xmlns="http://www.w3.org/2000/svg">
+					<path fill-rule="evenodd"
+						d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+						clip-rule="evenodd"></path>
+				</svg></a>
+		</li>
+		{% endfor %}
+	</ol>
+</div>
+
+{% if session["user_id"] %}
+<div class="fixed inset-x-0 bottom-0 mx-auto w-max mb-48">
+  <a href="/createBlog"><button class="btn btn-ghost mr-6" > create blog </button></a>
+	<a href="/manage"><button class="btn btn-ghost" > manage blogs </button></a>
+</div>
+
+  {% else %}
+
+	{% endif %}
+
+{% endblock %}

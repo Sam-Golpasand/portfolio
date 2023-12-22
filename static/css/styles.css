@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+/* For Webkit browsers like Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #232D3F; /* color of the tracking area, a dark color from your palette */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gray; /* color of the scroll thumb, a primary color from your palette */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #232D3F; /* creates padding around the scroll thumb with the same color as the track for a seamless look */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: gray #232D3F; /* thumb and track color */
+}
+
+
+html, body {
+    font-family: "Montserrat";
+    font-weight: 600;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+.flash-message {
+  transition: opacity 0.6s ease;
+}
+
+.pic {
+    /* Set the initial state of the image */
+    /* Other properties can be added here as well, such as transform, opacity, etc. */
+
+    /* Define the transition effect */
+    transition: transform 0.5s ease;
+}
+
+  .pic:hover{
+    transform: scale(1.1);
+
+  }
+
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 250px;
+  padding: 50px 20vw;
+}
+
+.spacer {
+  aspect-ratio: 960/150;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.layer1 {
+  background-image: url("../img/layer1.svg");
+}
+.layer2 {
+  background-image: url("../img/layer2.svg");
+}
+.layer3 {
+  background-image: url("../img/layer3.svg");
+}
+.layer4 {
+  background-image: url("../img/layer4.svg");
+}
+.layer5 {
+  background-image: url("../img/layer5.svg");
+}
+.layer6 {
+  background-image: url("../img/layer6.svg");
+}
+
+.solutionsharp {
+  height: 24rem;
+  background-image: url("../img/SolutionSharp.png");
+}
+
+.dark {
+  background-color: #232d3f;
+}
+
+.bottom-center {
+  position: fixed; /* Fixed position */
+  left: 50%;      /* Center the element horizontally */
+  bottom: 0;      /* Align the element to the bottom */
+  transform: translateX(-50%); /* Offset the element to the left by half its width */
+}
+

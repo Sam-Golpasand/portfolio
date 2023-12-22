@@ -1,0 +1,48 @@
+{% extends "layout.html" %} 
+
+{% block title %} Sam Golpasand {% endblock %} 
+
+{% block body %}
+  
+  <div class="max-w-4xl mx-auto mt-12">
+      <!-- Flash Message Container -->
+      <div class="fixed top-10 right-0 m-4 z-10" id="flash-message">
+          {% with messages = get_flashed_messages() %} {% if messages %} {% for msg in
+          messages %}
+          <div class="alert alert-info flex items-center p-4 mb-4">
+              <!-- Your alert icon and message -->
+          </div>
+          {% endfor %} {% endif %} {% endwith %}
+      </div>
+  
+      <table class="table-fixed mt-64 rounded-3xl">
+        <thead class="border">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date Posted</th>
+            <th>Delete?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in posts %}
+          <tr class="border">
+            <td>{{ post.title }}</td>
+            <td>{{ post.description }}</td>
+            <td>{{ post.date_posted }}</td>
+            <td> 
+              <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                <button type="submit" class="btn btn-error m-2">Delete?</button>
+              </form>
+            </td>
+          </tr>
+          {% else %}
+          <tr class="border">
+            <td class="col-span-4" > No Blogs</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  
+  {% endblock %}
