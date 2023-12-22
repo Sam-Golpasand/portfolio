@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block title %} Sam Golpasand {% endblock %} {%
+block body %}
+
+<div class="max-w-4xl mx-auto mt-12">
+    <!-- Flash Message Container -->
+    <div class="fixed top-10 right-0 m-4 z-10" id="flash-message">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for msg in
+        messages %}
+        <div class="alert alert-info flex items-center p-4 mb-4">
+            <!-- Your alert icon and message -->
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+    </div>
+
+    <!-- New Blog Post Form -->
+    <div class="mb-8 mt-64">
+        <h2 class="text-2xl font-bold mb-4">Create a New Blog Post</h2>
+        <form action="/createBlog" method="post" enctype="multipart/form-data">
+            <div class="mb-4">
+                <label for="title" class="block text-lg font-medium text-gray-700">Title</label>
+                <input type="text" id="title" name="title" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-lg font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" rows="3" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="content" class="block text-lg font-medium text-gray-700">Content</label>
+                <textarea id="content" name="content" rows="6" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="image" class="block text-lg font-medium text-gray-700">Image</label>
+                <input type="file" id="image" name="image" class="mt-1 block w-full" />
+            </div>
+            <div class="mb-4">
+                <button type="submit"
+                    class="px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                    Create Post
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

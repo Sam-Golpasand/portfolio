@@ -19,3 +19,27 @@ document.querySelectorAll('nav a').forEach(link => {
   link.onmouseover = () => link.style.backgroundColor = '#005B41';
   link.onmouseout = () => link.style.backgroundColor = '';
 });
+
+function showLoader() {
+  document.getElementById('loader').style.display = 'flex';
+}
+
+function hideLoader() {
+  document.getElementById('loader').style.display = 'none';
+}
+
+// Example AJAX request using Fetch API
+function fetchData() {
+  showLoader();
+  fetch('your-api-endpoint')
+      .then(response => response.json())
+      .then(data => {
+          // Process your data here
+      })
+      .catch(error => {
+          // Handle the error
+      })
+      .finally(() => {
+          hideLoader();
+      });
+}

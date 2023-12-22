@@ -4,8 +4,22 @@
 
 {% block body %}
 
-<div class="spacer layer1"></div>
-<section class="bg-secondary justify-center center text-center p-10" id="dark">
+<!-- Flash Message Container -->
+<div class="fixed top-10 right-0 m-4 z-10" id="flash-message">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-info flex items-center p-4 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6 mr-2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>{{ msg }}</span>
+        </div>
+        {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div class="spacer layer1 mt-8"></div>
+<section class="bg-secondary justify-center center text-center p-4 dark">
   <h1 class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r h-20 from-green-400 to-blue-500">
     Crafting Code, Engineering Elegance
   </h1>
@@ -21,20 +35,68 @@
 <section>
   <div class="grid grid-cols-2">
     <div>
-      <img src="../static/img/avatar.jpg" class="h-full max-h-screen rounded-xl" alt="">
+      <img src="../static/img/avatar.jpg" class="h-auto max-h-screen rounded-xl" alt="">
     </div>
     <div class="flex flex-col justify-center p-8">
-      <h1 class="text-4xl mb-4 font-thin">Sam Golpasand</h1>
-        <p class="font-medium">My journey in programming is an odyssey across a digital cosmos. I started with fundamental concepts, the constellations that mapped out the basics. Diving deeper, I navigated through the nebulae of data structures and the event horizons of complex algorithms.
+      <h1 class="text-4xl mb-4 font-extralight">Sam Golpasand</h1>
+        <p class="font-medium sm:text-sm lg:text-base">My journey in programming is an odyssey across a digital cosmos. I started with fundamental concepts, the constellations that mapped out the basics. Diving deeper, I navigated through the nebulae of data structures and the event horizons of complex algorithms.
           <br><br>
           Frameworks and libraries became my vessels, enabling swift passage through new realms of code. Challenges arose, like cryptic bugs, but each was a lesson that expanded my knowledge galaxy.
           <br><br>
           Collaboration with fellow coders brought shared victories and insights. Every problem solved and project launched was a star ignited in my expanding universe of experience, a continuous adventure in the ever-evolving expanse of technology.
         </p>
-
     </div>
   </div>
 </section>
 
+<div class="spacer layer1"></div>
+
+<section class="dark">
+  <h1 class="text-6xl">My Projects</h1>
+  <h1 class="text-sm text-slate-700 mb-10">going deeper...</h1>
+  <div class="flex flex-auto">
+    <!-- ... 1st Project ... -->
+    <a href="https://solutionsharp.com/"><div class="h-96 w-80 bg-black m-12 rounded-lg transition duration-200 ease-in hover:scale-105 hover:shadow-2xl" >
+      <div class="h-full w-full opacity-0 hover:opacity-100 flex justify-center items-center transition duration-200 ease-in">
+        <div class="text-center space-y-4">
+          <!-- Date text -->
+          <p class="text-sm font-medium text-white">October 2023</p>
+          <!-- Main title text -->
+          <h1 class="text-5xl font-bold text-white">Solution Sharp</h1>
+          <!-- Subtitle text -->
+          <p class="text-lg text-white">Website</p>
+        </div>
+      </div>
+    </div></a>
+    <!-- ... 2nd Project ... -->
+    <div class="h-96 w-80 bg-black m-12 rounded-lg transition duration-200 ease-in hover:scale-105 hover:shadow-2xl">
+      <div class="h-full w-full opacity-0 hover:opacity-100 flex justify-center items-center transition duration-200 ease-in">
+        <div class="text-center space-y-4">
+          <!-- Date text -->
+          <p class="text-sm font-medium text-white">August 2020</p>
+          <!-- Main title text -->
+          <h1 class="text-5xl font-bold text-white">SamTheBot</h1>
+          <!-- Subtitle text -->
+          <p class="text-lg text-white">Discord Bot</p>
+        </div>
+      </div>
+    </div>
+    <!-- ... 3rd Project ... -->
+    <div class="h-96 w-80 bg-black m-12 rounded-lg transition duration-200 ease-in hover:scale-105 hover:shadow-2xl">
+      <div class="h-full w-full opacity-0 hover:opacity-100 flex justify-center items-center transition duration-200 ease-in">
+        <div class="text-center space-y-4">
+          <!-- Date text -->
+          <p class="text-sm font-medium text-white">October 2023</p>
+          <!-- Main title text -->
+          <h1 class="text-5xl font-bold text-white">Solution Sharp</h1>
+          <!-- Subtitle text -->
+          <p class="text-lg text-white">Website</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="spacer layer2"></div>
 
 {% endblock %}

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 /* For Webkit browsers like Chrome, Safari, and Edge */
 ::-webkit-scrollbar {
@@ -24,8 +26,8 @@
 
 
 html, body {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
+    font-family: "Montserrat";
+    font-weight: 600;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -57,7 +59,7 @@ section {
 }
 
 .spacer {
-  aspect-ratio: 960/200;
+  aspect-ratio: 960/150;
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -71,6 +73,27 @@ section {
   background-image: url("../img/layer2.svg");
 }
 
-#dark {
+.solutionsharp {
+  height: 24rem;
+  background-image: url("../img/SolutionSharp.png");
+}
+
+.dark {
   background-color: #232d3f;
+}
+
+.loader {
+  border-top-color: #3498db; /* Use your primary color here */
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
