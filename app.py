@@ -38,11 +38,7 @@ def login():
             flash("Email and password required", "warning")
 
         adminMail = "samgolpasand45@gmail.com"
-        adminPassword = bcrypt.generate_password_hash('1234')
-
-        if adminMail != email or bcrypt.check_password_hash(adminPassword, '1234'):
-            flash("Invalid email or password", "warning")
-            return redirect("/login")
+        adminPassword = 1234
 
 
         session["user_id"] = 1

@@ -44,6 +44,8 @@ function fetchData() {
       });
 }
 
+
+
 document.addEventListener('alpine:init', () => {
   Alpine.data('skillDisplay', () => ({
       skills: [{
