@@ -1,5 +1,4 @@
 flask_session/
 __pycache__/
 node_modules/
-/blog.db
 /static/css/main.css

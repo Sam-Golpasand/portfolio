@@ -96,6 +96,11 @@ def manageBlog():
         dbClose(conn, c)
         return render_template("manageBlog.html", posts=posts)
 
+@app.route("/about")
+def about():
+    return render_template("aboutme.html")
+
+
 @app.route("/delete-post/<int:post_id>", methods=["POST"])
 @login_required
 def delete_post(post_id):
