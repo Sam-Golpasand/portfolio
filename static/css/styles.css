@@ -86,8 +86,16 @@ section {
   background-image: url("../img/layer6.svg");
 }
 
+.layerYellowB {
+  background-image: url("../img/LayerYelloB.svg");
+}
+.layerYellowT {
+  background-image: url("../img/layerYellowT.svg");
+}
+
+
 .solutionsharp {
-  height: 24rem;
+  background-position: center;
   background-image: url("../img/SolutionSharp.png");
 }
 
@@ -100,5 +108,30 @@ section {
   left: 50%;      /* Center the element horizontally */
   bottom: 0;      /* Align the element to the bottom */
   transform: translateX(-50%); /* Offset the element to the left by half its width */
+}
+
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  font-weight: 500;
+}
+
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 

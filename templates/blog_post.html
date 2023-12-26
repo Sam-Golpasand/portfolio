@@ -8,7 +8,7 @@
     <p class="text-gray-600">{{ post.date_posted }}</p>
     <img src="../static/{{ post.image_url }}" alt="{{ post.title }}">
     <div class="mt-4">
-        <p>{{ post.content }}</p>
+        <p>{{ post.content | replace('\n', '<br>') | safe }}</p>
     </div>
 </div>
 {% endblock %}
