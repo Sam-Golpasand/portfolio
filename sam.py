@@ -43,5 +43,8 @@ def createDb():
     content TEXT NOT NULL,
     date_posted DATETIME NOT NULL,
     image_url VARCHAR(255));""")
+    c.execute("""CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              email TEXT NOT NULL UNIQUE, 
+              passhash TEXT);""")
 
 #createDb()

@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, flash, url_for, send_from_directory
 from flask_bcrypt import Bcrypt
+from dotenv import load_dotenv
 from flask_session import Session
 from werkzeug.utils import secure_filename
 from sam import login_required, dbCon, dbClose
@@ -8,6 +9,9 @@ import os
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+load_dotenv()
+EMAIL = os.getenv('EMAIL')
+PASSWORD = os.getenv('PASSWORD')
 
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SECRET_KEY'] = os.urandom(24)
@@ -28,23 +32,28 @@ def blog():
     dbClose(conn, c)
     return render_template("blog.html", blogs=blogs)
 
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "POST":
+    if request.method == 'POST':
         email = request.form.get("email")
         password = request.form.get("password")
 
         if not email or not password:
             flash("Email and password required", "warning")
 
-        adminMail = "samgolpasand45@gmail.com"
-        adminPassword = 1234
+        
 
-
+        if EMAIL != email or PASSWORD != password:
+            flash("Invalid email or password", "warning")
+            return redirect("/login")
+        
+        
         session["user_id"] = 1
         flash("You have been logged in!", "info")
-        return redirect("createBlog")
-    else:
+        return redirect("/createBlog")
+    else:    
         return render_template("login.html")
 
 @app.route("/createBlog", methods=["GET", "POST"])
