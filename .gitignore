@@ -1,4 +1,5 @@
 flask_session/
 __pycache__/
 node_modules/
-/static/css/main.css
+./static/css/main.css
+./.env

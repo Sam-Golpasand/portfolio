@@ -1,11 +1,9 @@
 import os
-import requests
 import urllib.parse
 from functools import wraps
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_bcrypt import Bcrypt
 import bcrypt
-import requests
 from flask_session import Session
 import random 
 import sqlite3

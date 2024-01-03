@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask_session import Session
 from werkzeug.utils import secure_filename
 from sam import login_required, dbCon, dbClose
+import markdown
 import sqlite3
 import os
 
@@ -100,7 +101,7 @@ def createBlog():
 @login_required
 def manageBlog():
         conn, c = dbCon()
-        c.execute("SELECT * FROM blogPost")
+        c.execute("SELECT * FROM blogPost  ORDER BY date_posted DESC")
         posts = c.fetchall()
         dbClose(conn, c)
         return render_template("manageBlog.html", posts=posts)
@@ -131,7 +132,15 @@ def blog_post(post_id):
         flash("Blog post not found.", "warning")
         return redirect(url_for('blog'))
 
-    return render_template("blog_post.html", post=post)
+    # Convert sqlite3.Row to a mutable dictionary
+    post_dict = dict(post)
+
+    # Convert Markdown content to HTML
+    post_dict['content'] = markdown.markdown(post_dict['content'])
+
+    return render_template("blog_post.html", post=post_dict)
+
+
 
 
 @app.route("/logout")
