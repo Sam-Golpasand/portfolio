@@ -1,24 +1,29 @@
+#All of the imports
 from flask import Flask, redirect, render_template, request, session, flash, url_for, send_from_directory
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
 from flask_session import Session
 from werkzeug.utils import secure_filename
-from sam import login_required, dbCon, dbClose
+from tools import login_required, dbCon, dbClose
 import markdown
 import sqlite3
 import os
 
+#Initialize the app and bcrypt for login.
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+
+#load the .env file and fetch the email and password
 load_dotenv()
 EMAIL = os.getenv('EMAIL')
 PASSWORD = os.getenv('PASSWORD')
 
+#Config the app 
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['UPLOAD_FOLDER'] = "static/uploads"
 
-Session(app)
+Session(app) 
 
 
 @app.route("/")
@@ -28,6 +33,7 @@ def index():
 @app.route("/blog")
 def blog():
     conn, c = dbCon()
+    #Select all the blogs and fetch them all to be displayed
     c.execute("SELECT * FROM blogPost ORDER BY date_posted DESC")
     blogs = c.fetchall()
     dbClose(conn, c)
@@ -38,9 +44,11 @@ def blog():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == 'POST':
+        # Fetch the email and password
         email = request.form.get("email")
         password = request.form.get("password")
 
+        #Check if anything has been entered
         if not email or not password:
             flash("Email and password required", "warning")
 
@@ -57,10 +65,13 @@ def login():
     else:    
         return render_template("login.html")
 
+#Initialising the createblog function by accepting GET and POST requests
+# @login_required: A wrapper from tools.py that redirects if no session is found.
 @app.route("/createBlog", methods=["GET", "POST"])
 @login_required
 def createBlog():
     if request.method == "POST":
+        #Get the contents of the blog
         title = request.form.get("title")
         description = request.form.get("description")
         content = request.form.get("content")
@@ -83,13 +94,16 @@ def createBlog():
 
         conn, c = dbCon()
         try:
+            #Try to intert the blog
             c.execute("INSERT INTO blogPost (title, description, content, image_url, date_posted) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)", 
                       (title, description, content, image_url))
             conn.commit()
             flash("Blog post created successfully!", "success")
+            #If there is a sqlite error run this code instead
         except sqlite3.Error as e:
             print(f"An error occurred: {e.args[0]}")
             flash("An error occurred while creating the blog post.", "danger")
+            #Then always close the database disregard if there was an error or not
         finally:
             dbClose(conn, c)
 
@@ -101,6 +115,7 @@ def createBlog():
 @login_required
 def manageBlog():
         conn, c = dbCon()
+        #Display the blog posts, ordered by the newest
         c.execute("SELECT * FROM blogPost  ORDER BY date_posted DESC")
         posts = c.fetchall()
         dbClose(conn, c)
@@ -113,8 +128,10 @@ def about():
 
 @app.route("/delete-post/<int:post_id>", methods=["POST"])
 @login_required
+# Make a function that takes an blogId as a argument
 def delete_post(post_id):
     conn, c = dbCon()
+    # Find the id of the post and then delete it
     c.execute("DELETE FROM blogPost WHERE id = ?", (post_id,))
     conn.commit()
     dbClose(conn, c)
@@ -122,8 +139,10 @@ def delete_post(post_id):
     return redirect("/manage")
 
 @app.route("/blog/<int:post_id>")
+# Make a function that takes an blogId as a argument
 def blog_post(post_id):
     conn, c = dbCon()
+    #Fetch all of the data from the post from the db
     c.execute("SELECT * FROM blogPost WHERE id = ?", (post_id,))
     post = c.fetchone()
     dbClose(conn, c)
@@ -145,19 +164,22 @@ def blog_post(post_id):
 
 @app.route("/logout")
 def logout():
+    # Clear the session
     session.clear()
     flash("You have been logged out!", "info")
     return redirect("/")
 
+# Simple error handler for the console
 @app.errorhandler(Exception)
 def handle_error(error):
     return f"An error occurred: {str(error)}", 500
 
+# Function to handle uploaded files and where to store them
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(os.path.join(app.root_path, 'static', 'img', 'upload'), filename)
 
 
-
+# Call the project and host it on 0.0.0.0:5000
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    app.run(debug=True)
